@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Alert, Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { getDonor } from "../services/StudentApiService";
-
+import "./DonorLoginForm.css";
 export class DonorLoginForm extends Component {
     constructor() {
         super();
@@ -31,7 +31,7 @@ export class DonorLoginForm extends Component {
         event.preventDefault();
         const response = await getDonor(this.state.formData);
         console.log(response.data);
-        if(response.status==200){
+        if(response.status===200){
             this.setState({formData:{id:''}});
             this.openDialog();
         }
@@ -77,3 +77,4 @@ export class DonorLoginForm extends Component {
         );
     }
 }
+
