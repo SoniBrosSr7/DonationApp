@@ -14,10 +14,10 @@ export class NavigationBar extends Component {
                             <LinkContainer to={'/'}>
                                 <Nav.Link>DonorHome</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to={'/register'}>
+                            <LinkContainer to={'/donorregister'}>
                                 <Nav.Link>Register Donor</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to={'/login'}>
+                            <LinkContainer to={'/donorlogin'}>
                                 <Nav.Link>Login Donor</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to={'/donor-profile'}>

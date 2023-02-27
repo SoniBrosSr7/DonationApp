@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:9800/donors';
+const BASE_URL = 'http://localhost:8080/';
 
 export async function saveDonor(donor){
-    return axios.post(BASE_URL,donor)
+    console.log(donor);
+    return axios.post(BASE_URL+"donorRegister",donor);
 }
 
 export async function getDonor(donor){

@@ -8,17 +8,11 @@ export class DonorLoginForm extends Component {
         super();
         this.state = {
             formData: {},
-            modalOpeningStatus: false,
             defaultValues: { id: '', name: '' }
         }
     }
 
-    openDialog = () => {
-        this.setState({ modalOpeningStatus: true });
-    }
-    closeDialog = () => {
-        this.setState({ modalOpeningStatus: false });
-    }
+    
     handleChange = (event) => {
         this.setState(
             {
@@ -35,7 +29,7 @@ export class DonorLoginForm extends Component {
         console.log(response.data);
         if (response.status == 200) {
             this.setState({ formData: { id: '' } });
-            this.openDialog();
+          
         }
 
     }

@@ -1,14 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { StudentsList } from "./components/StudentsList";
-import { StudentsFilter } from "./components/StudentsFilter";
+
 import { DonorHome } from "./components/DonorHome";
 import { DonorRegistrationForm } from "./components/DonorRegistrationForm";
 import { DonorLoginForm } from "./components/DonorLoginForm";
-import { AdminLoginForm } from "./components/Admin/AdminLoginForm"
-import { AdminViewDonationsMade } from "./components/Admin/AdminViewDonationsMade";
-import { AdminViewDonors } from "./components/Admin/AdminViewDonors";
+// import { AdminLoginForm } from "./components/Admin/AdminLoginForm"
+// import { AdminViewDonationsMade } from "./components/Admin/AdminViewDonationsMade";
+// import { AdminViewDonors } from "./components/Admin/AdminViewDonors";
 
 function App() {
   return (
@@ -19,12 +18,11 @@ function App() {
             <Route path="/" element={<DonorHome></DonorHome>}></Route>
             <Route path='/donorregister' element={<DonorRegistrationForm></DonorRegistrationForm>}></Route>
             <Route path='/donorlogin' element={<DonorLoginForm></DonorLoginForm>}></Route>
-            <Route path='/students-list' element={<StudentsList></StudentsList>}></Route>
-            <Route path='/students-filter' element={<StudentsFilter></StudentsFilter>}></Route>
+           
 
-            <Route path='/adminLogin' element={<AdminLoginForm></AdminLoginForm>}></Route>
+            {/* <Route path='/adminLogin' element={<AdminLoginForm></AdminLoginForm>}></Route>
             <Route path='/adminViewDonations' element={<AdminViewDonationsMade></AdminViewDonationsMade>}></Route>
-            <Route path='/adminViewDonors' element={<AdminViewDonors/>}></Route>
+            <Route path='/adminViewDonors' element={<AdminViewDonors/>}></Route> */}
           </Routes>
         </BrowserRouter>
       </>    
