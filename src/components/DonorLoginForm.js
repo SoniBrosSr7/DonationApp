@@ -1,29 +1,31 @@
 import { Component } from "react";
 import { Alert, Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
-import { getDonor } from "../services/StudentApiService";
+import { getDonor } from "../services/DonerApiService";
+// import { getDonor } from "../services/StudentApiService";
 
 export class DonorLoginForm extends Component {
     constructor() {
         super();
         this.state = {
-            formData:{},
+            formData: {},
             modalOpeningStatus: false,
-            defaultValues:{id:'',name:''}
+            defaultValues: { id: '', name: '' }
         }
     }
-   
-    openDialog=()=>{
-        this.setState({modalOpeningStatus:true});
+
+    openDialog = () => {
+        this.setState({ modalOpeningStatus: true });
     }
-    closeDialog=()=>{
-        this.setState({modalOpeningStatus:false});
+    closeDialog = () => {
+        this.setState({ modalOpeningStatus: false });
     }
     handleChange = (event) => {
         this.setState(
-            { 
-                formData: {...this.state.formData,
-                        [event.target.name]:event.target.value
-                    } 
+            {
+                formData: {
+                    ...this.state.formData,
+                    [event.target.name]: event.target.value
+                }
             }
         );
     }
@@ -31,11 +33,11 @@ export class DonorLoginForm extends Component {
         event.preventDefault();
         const response = await getDonor(this.state.formData);
         console.log(response.data);
-        if(response.status==200){
-            this.setState({formData:{id:''}});
+        if (response.status == 200) {
+            this.setState({ formData: { id: '' } });
             this.openDialog();
         }
-        
+
     }
     render() {
         return (
@@ -43,23 +45,40 @@ export class DonorLoginForm extends Component {
                 <Container className="mt-4 text-center">
                     <Alert>Donor Login Form</Alert>
                 </Container>
-                <Container className="mt-4">
+                <Container className="mt-4 text-center" >
                     <Form onSubmit={this.handleSubmit}>
+                        
                         <Row>
-                            <Col lg={6}>
+                        <Col lg={4} >
+                              
+                            </Col>
+                            <Col lg={4} >
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Donor Id</Form.Label>
-                                    <Form.Control type="text"  placeholder="Enter id" name='id' onChange={this.handleChange} />
+                                    <Form.Label>DonorId</Form.Label>
+                                    <Form.Control type="text" style={{ textAlign:"center" }}  placeholder="Enter id" name='id' onChange={this.handleChange} />
                                 </Form.Group>
                             </Col>
-                            <Col lg={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="Password" placeholder="Enter Password" name='pass' onChange={this.handleChange} />
-                                </Form.Group>
+                            <Col lg={4} >
+                              
                             </Col>
                         </Row>
+                        <Row>
+                        <Col lg={4} >
+                              
+                              </Col>
+                            <Col lg={4} >
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" style={{ textAlign:"center" }} placeholder="Enter Password" name='pass' onChange={this.handleChange} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg={4} >
+                              
+                              </Col>
+                        </Row>
+                        
                         <Button type='submit' variant="success">Donor Login</Button>
+                       
                     </Form>
                 </Container>
                 <Modal show={this.state.modalOpeningStatus} onHide={this.closeDialog}>

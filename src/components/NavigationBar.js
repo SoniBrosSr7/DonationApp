@@ -20,8 +20,8 @@ export class NavigationBar extends Component {
                             <LinkContainer to={'/login'}>
                                 <Nav.Link>Login Donor</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to={'/students-list'}>
-                                <Nav.Link>View Donor</Nav.Link>
+                            <LinkContainer to={'/donor-profile'}>
+                                <Nav.Link>View Donor Profile</Nav.Link>
                             </LinkContainer>
                             {/* <LinkContainer to={'/students-filter'}>
                                 <Nav.Link>Filter Students</Nav.Link>
