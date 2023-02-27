@@ -1,18 +1,6 @@
-
-import React, { useState } from "react";
-
-const RegistrationForm = () => {
-    // Define state for form inputs and errors
-    const [donorName, setDonorName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState({});
-
-    const isValidMobileNumber = (phoneNumber) => {
-        // Regular expression to check if the phoneNumber contains only numbers
-        const phoneNumberRegex = /^[0-9]+$/;
+import { Component } from "react";
+import { Alert, Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import { saveDonor } from "../services/StudentApiService";
 
         // Check if the phoneNumber matches the regex and has 10 digits (assuming a standard 10-digit mobile number)
         return phoneNumberRegex.test(phoneNumber) && phoneNumber.length === 10;
@@ -28,89 +16,103 @@ const RegistrationForm = () => {
             validationErrors.password = "Password must be at least 8 characters long";
         }
 
-        if (!phone.trim()) {
-            validationErrors.phone = "Phone Number is required";
+export class DonorRegistrationForm extends Component {
+    constructor() {
+        super();
+        this.state = {
+            formData:{},
+            modalOpeningStatus: false,
+            defaultValues:{id:'',name:''}
         }
-        else if (isValidMobileNumber(phone)) // true) {
-            validationErrors.email = "Phone Number is invalid";
     }
+   
+    openDialog=()=>{
+        this.setState({modalOpeningStatus:true});
+    }
+    closeDialog=()=>{
+        this.setState({modalOpeningStatus:false});
+    }
+    handleChange = (event) => {
+        this.setState(
+            { 
+                formData: {...this.state.formData,
+                        [event.target.name]:event.target.value
+                    } 
+            }
+        );
+    }
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        const response = await saveDonor(this.state.formData);
+        console.log(response.data);
+        if(response.status==200){
+            this.setState({formData:{id:''}});
+            this.openDialog();
+        }
+        
+    }
+    render() {
+        return (
+            <>
+                <Container className="mt-4 text-center">
+                    <Alert>Donor registration form</Alert>
+                </Container>
+                <Container className="mt-4">
+                    <Form onSubmit={this.handleSubmit}>
+                        <Row>
+                            <Col lg={6}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>DonorId</Form.Label>
+                                    <Form.Control type="text" readOnly={true} value={this.state.formData.id} placeholder="Auto Genrated"  name='id' onChange={this.handleChange} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg={6}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>DonorName</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter name" name='name' onChange={this.handleChange} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg={6}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>DonorPhone</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter phone" name='phone' onChange={this.handleChange} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg={6}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>DonorEmail</Form.Label>
+                                    <Form.Control type="email" placeholder="Enter email" name='email' onChange={this.handleChange} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg={6}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>DonorPassword</Form.Label>
+                                    <Form.Control type="password" placeholder="Enter Password" name='pass' onChange={this.handleChange} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg={6}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Confirm DonorPassword</Form.Label>
+                                    <Form.Control type="password" placeholder="Confirm Password" name='cpass' onChange={this.handleChange} />
+                                </Form.Group>
+                            </Col>
 
-    if (!email) {
-        validationErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-        validationErrors.email = "Email is invalid";
+                        </Row>
+                        <Button type='submit' variant="success">Register Donor</Button>
+                    </Form>
+                </Container>
+                <Modal show={this.state.modalOpeningStatus} onHide={this.closeDialog}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Success</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Donor registered!</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.closeDialog}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
+        );
     }
-    if (!password) {
-        validationErrors.password = "Password is required";
-    } else if (password.length < 8) {
-        validationErrors.password = "Password must be at least 8 characters long";
-    }
-    if (!confirmPassword) {
-        validationErrors.confirmPassword = "Confirm password is required";
-    } else if (password !== confirmPassword) {
-        validationErrors.confirmPassword = "Passwords do not match";
-    }
-    // If there are validation errors, set errors state and return
-    if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
-        return;
-    }
-    // If form is valid, submit form data to server
-    // ...
-};
-
-return (
-    <form onSubmit={handleSubmit}>
-        <label>
-            Donor Name:
-            <input
-                type="text"
-                value={donorName}
-                onChange={(e) => setDonorName(e.target.value)}
-            />
-            {errors.donorName && <div className="error" style={{color:"red"}}>{errors.donorName}</div>}
-        </label>
-        <label>
-            Donor Phone Number:
-            <input
-                type="text"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-            />
-            {errors.lastName && <div className="error">{errors.lastName}</div>}
-        </label>
-        <label>
-            Email:
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            {errors.email && <div className="error">{errors.email}</div>}
-        </label>
-        <label>
-            Password:
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password && <div className="error">{errors.password}</div>}
-        </label>
-        <label>
-            Confirm password:
-            <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            {errors.confirmPassword && (
-                <div className="error">{errors.confirmPassword}</div>
-            )}
-        </label>
-        <button type="submit">Register</button>
-    </form>
-);
-};
-
-export default RegistrationForm;
+}

@@ -1,0 +1,60 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.donor-login-form-container {
+    margin-top: 4rem;
+  }
+  
+  .donor-login-form-alert {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .donor-login-form-label {
+    font-size: 1.2rem;
+  }
+  
+  .donor-login-form-input {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .donor-login-form-submit-btn {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #28a745;
+  }
+  
+  .donor-login-form-submit-btn:hover {
+    background-color: #218838;
+  }
+  
+  .donor-login-form-modal-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .donor-login-form-modal-body {
+    font-size: 1.5rem;
+  }
+  
+  .donor-login-form-modal-close-btn {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #28a745;
+  }
+  
+  .donor-login-form-modal-close-btn:hover {
+    background-color: #218838;
+  }
+  
