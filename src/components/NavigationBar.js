@@ -14,21 +14,18 @@ export class NavigationBar extends Component {
               <LinkContainer to={"/"}>
                 <Nav.Link>DonorHome</Nav.Link>
               </LinkContainer>
-              <LinkContainer to={"/donor-registration-from"}>
+              <LinkContainer to={"/register"}>
                 <Nav.Link>Register Donor</Nav.Link>
               </LinkContainer>
-              <LinkContainer to={"/donor-login"}>
+              <LinkContainer to={"/login"}>
                 <Nav.Link>Login Donor</Nav.Link>
               </LinkContainer>
-              {/* <LinkContainer to={"/donor-profile"}>
-                <Nav.Link>View Donor Profile</Nav.Link>
-              </LinkContainer> */}
-              <LinkContainer to={"/browse-causes"}>
-                <Nav.Link>Browse Causes</Nav.Link>
+              <LinkContainer to={"/students-list"}>
+                <Nav.Link>View Donor</Nav.Link>
               </LinkContainer>
-              <LinkContainer to={"/donor-details"}>
-                <Nav.Link>Donor Details</Nav.Link>
-              </LinkContainer>
+              {/* <LinkContainer to={'/students-filter'}>
+                                <Nav.Link>Filter Students</Nav.Link>
+                            </LinkContainer> */}
             </Nav>
           </Navbar.Collapse>
         </Container>
